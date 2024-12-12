@@ -338,7 +338,58 @@
 
     <section class='mt-5 mb-5'>
      <div class="container">
-        <h1>Contact Us</h1>
+        <h1 class="text-center mb-4">Contact Us</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <form class="shadow p-4" id="contactForm">
+              <div class="form-group">
+                <input type="text" class="form-control mb-3" id="name" placeholder="Enter full name" required>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control mb-3" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control mb-3" id="phone" placeholder="Phone no." required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control mb-3" id="address" placeholder="Address" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            
+            <script>
+              document.getElementById('contactForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+            
+                // Get form data
+                var name = document.getElementById('name').value;
+                var email = document.getElementById('email').value;
+                var phone = document.getElementById('phone').value;
+                var address = document.getElementById('address').value;
+            
+                // Format the message for WhatsApp
+                var message = `Hello, I would like to share the following details:\n\n` +
+                              `Name: ${name}\n` +
+                              `Email: ${email}\n` +
+                              `Phone: ${phone}\n` +
+                              `Address: ${address}`;
+            
+                // Encode the message to be used in a URL
+                var encodedMessage = encodeURIComponent(message);
+            
+                // Redirect to WhatsApp with the message
+                var whatsappUrl = `https://wa.me/919696860365?text=${encodedMessage}`;
+                window.open(whatsappUrl, '_blank');
+              });
+            </script>
+            
+          </div>
+          <div class="col-md-6">
+            <div class="shadow">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3032.402995549357!2d83.00624432783069!3d25.332572010236877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2e133ab4a06b%3A0xa593d881311f8e24!2sj%2C%2021%2F41%2C%20Rasoolpura%2C%20Bunker%20Colony%2C%20Alaipura%2C%20Jaitpura%2C%20Varanasi%2C%20Uttar%20Pradesh%20221001!5e0!3m2!1sen!2sin!4v1733994855067!5m2!1sen!2sin" width="100%" height="290" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+            </div>
+          </div>
+        </div>
      </div>
         
     </section>
@@ -391,16 +442,16 @@
               <h5 class="widget-title">Useful links</h5>
               <ul class="menu-list list-unstyled">
                 <li class="menu-item">
-                  <a href="#" class="nav-link">About us</a>
+                  <a href="/bsaress.html" class="nav-link">Banarasi Sarees</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Terms & Conditions </a>
+                  <a href="semigeogerttesaree.html" class="nav-link">Semi Georgette Sarees </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Privacy & Policy </a>
+                  <a href="/linen.html" class="nav-link">Linen Tissue Sarees </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Contact Us</a>
+                  <a href="/orgenza-saree.html" class="nav-link">Organza Sarees</a>
                 </li>
               </ul>
             </div>
@@ -408,19 +459,19 @@
         
           <div class="col-md-3 col-sm-6">
             <div class="footer-menu">
-              <h5 class="widget-title">Customer Service</h5>
+              <h5 class="widget-title">Help</h5>
               <ul class="menu-list list-unstyled">
                 <li class="menu-item">
-                  <a href="#" class="nav-link">About us</a>
+                  <a href="/about-us.html" class="nav-link">About us</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Terms & Conditions </a>
+                  <a href="/terms-and-conditions.html" class="nav-link">Terms & Conditions </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Privacy & Policy </a>
+                  <a href="/privacy-policy.html" class="nav-link">Privacy & Policy </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Contact Us</a>
+                  <a href="/contact-us.html" class="nav-link">Contact Us</a>
                 </li>
               </ul>
             </div>
