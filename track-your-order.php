@@ -10,7 +10,10 @@
     <section class='mt-5 mb-5'>
         <div class="container">
             <form method="post" class="shadow p-4 rounded bg-light" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <a href="javascript:history.back()" title="Go Back" style="text-decoration: none; font-size: 14px;">&#8592; Go Back</a>
                 <h1 class="mb-3 text-center">Track Your Orders</h1>
+
+                <p class="text-center">Your payment ID and phone number were sent to you via email when you purchased the product. You can find the payment ID and phone number required to track your order.</p>
                 <input class="form-control mb-3" type="text" name="payment_id" id="payment_id" required placeholder="Enter Your Payment ID">
                 <input class="form-control mb-3" type="text" name="phone" id="phone" required placeholder="Enter Your Phone No.">
                 <div class="text-center">
