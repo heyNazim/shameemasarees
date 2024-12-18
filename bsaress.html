@@ -27,79 +27,87 @@
   <body>
 
 
-
-<script>
-    function pay_now(event) {
-        event.preventDefault();
-
-        // Fetching input values
-        var name = jQuery('#name').val();
-        var amt = jQuery('#amt').val();
-        var email = jQuery('#email').val();
-        var phone = jQuery('#phone').val();
-        var address = jQuery('#address').val();
-
-        // Sending data to the backend
-        jQuery.ajax({
-            type: 'post',
-            url: 'payment_process.php',
-            data: {
-                amt: amt,
-                name: name,
-                email: email,
-                phone: phone,
-                address: address
-            },
-            success: function (result) {
-                // Razorpay options
-                var options = {
-                    "key": "rzp_test_zpZdWBPgQwjbq0",
-                    // "key": "rzp_live_9ggYgg6ccV2PqL",
-                    "amount": amt * 100, // Amount in paise
-                    "currency": "INR",
-                   "name": "Shameema sarees",
-                    "description": "Test Transaction",
-                    "image": "https://shameemasarees.com/images/logo.webp",
-                    "prefill": {
-                        "name": name,
-                        "email": email,
-                        "contact": phone
-                    },
-                    "handler": function (response) {
-                        // Send Razorpay payment ID to the server
-                        jQuery.ajax({
-                            type: 'post',
-                            url: 'payment_process.php',
-                            data: {
-                                payment_id: response.razorpay_payment_id
-                            },
-                            success: function (result) {
-                                window.location.href = "thank_you.php";
-                            },
-                            error: function (error) {
-                                alert("Payment failed. Please try again.");
-                                console.log(error);
-                            }
-                        });
-                    },
-                    "modal": {
-                        "escape": false
-                    }
-                };
-
-                // Initialize Razorpay and open payment popup
-                var rzp1 = new Razorpay(options);
-                rzp1.open();
-            },
-            error: function (error) {
-                alert("Error occurred while initiating payment. Please try again.");
-                console.log(error);
-            }
-        });
-
-        return false; // Prevent form from traditional submission
-    }
-</script>
+    <script>
+      function pay_now(event) {
+          event.preventDefault();
+  
+          // Fetching input values
+          var name = jQuery('#name').val();
+          var amt = jQuery('#amt').val();
+          var email = jQuery('#email').val();
+          var phone = jQuery('#phone').val();
+          var address = jQuery('#address').val();
+  
+          // Sending data to the backend
+          jQuery.ajax({
+              type: 'post',
+              url: 'payment_process.php',
+              data: {
+                  amt: amt,
+                  name: name,
+                  email: email,
+                  phone: phone,
+                  address: address
+              },
+              success: function (result) {
+                  // Razorpay options
+                  var options = {
+                      // "key": "rzp_test_zpZdWBPgQwjbq0",
+                      "key": "rzp_live_9ggYgg6ccV2PqL",
+                      "amount": amt * 100, // Amount in paise
+                      "currency": "INR",
+                      "name": "Shameema sarees",
+                      "description": "Test Transaction",
+                      "image": "https://shameemasarees.com/images/logo.webp",
+                      "prefill": {
+                          "name": name,
+                          "email": email,
+                          "contact": phone
+                      },
+                      "handler": function (response) {
+                          // Send Razorpay payment ID to the server
+                          jQuery.ajax({
+                              type: 'post',
+                              url: 'payment_process.php',
+                              data: {
+                                  payment_id: response.razorpay_payment_id
+                              },
+                              success: function (result) {
+                                  window.location.href = "thank_you.php";
+                              },
+                              error: function (error) {
+                                  alert("Payment failed. Please try again.");
+                                  console.log(error);
+                              }
+                          });
+                      },
+                      "modal": {
+                          "escape": false
+                      },
+                      // Disabling EMI
+                      "method": {
+                          "card": true,       // Allow card payments
+                          "netbanking": true, // Allow net banking
+                          "upi": true,        // Allow UPI
+                          "wallet": true,     // Allow wallet payments
+                          "emi": false        // Disable EMI
+                      }
+                  };
+  
+                  // Initialize Razorpay and open payment popup
+                  var rzp1 = new Razorpay(options);
+                  rzp1.open();
+              },
+              error: function (error) {
+                  alert("Error occurred while initiating payment. Please try again.");
+                  console.log(error);
+              }
+          });
+  
+          return false; // Prevent form from traditional submission
+      }
+  </script>
+  
 
 <script>
   // Function to set the value of 'amt' input field
