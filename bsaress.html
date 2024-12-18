@@ -53,8 +53,8 @@
             success: function (result) {
                 // Razorpay options
                 var options = {
-                    // "key": "rzp_test_zpZdWBPgQwjbq0",
-                    "key": "rzp_live_9ggYgg6ccV2PqL",
+                    "key": "rzp_test_zpZdWBPgQwjbq0",
+                    // "key": "rzp_live_9ggYgg6ccV2PqL",
                     "amount": amt * 100, // Amount in paise
                     "currency": "INR",
                    "name": "Shameema sarees",
@@ -100,6 +100,18 @@
         return false; // Prevent form from traditional submission
     }
 </script>
+
+<script>
+  // Function to set the value of 'amt' input field
+  function setAmount(button) {
+      // Get the value of the clicked button
+      var amount = button.value;
+
+      // Set the value of the 'amt' input field
+      document.getElementById('amt').value = amount;
+  }
+</script>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -122,123 +134,7 @@
   </div>
 </div>
 
-<script>
-  // Function to set the value of 'amt' input field
-  function setAmount(button) {
-      // Get the value of the clicked button
-      var amount = button.value;
 
-      // Set the value of the 'amt' input field
-      document.getElementById('amt').value = amount;
-  }
-</script>
-
-
-
-<script>
-    function pay_now(event) {
-        event.preventDefault();
-
-        // Fetching input values
-        var name = jQuery('#name').val();
-        var amt = jQuery('#amt').val();
-        var email = jQuery('#email').val();
-        var phone = jQuery('#phone').val();
-        var address = jQuery('#address').val();
-
-        // Sending data to the backend
-        jQuery.ajax({
-            type: 'post',
-            url: 'payment_process.php',
-            data: {
-                amt: amt,
-                name: name,
-                email: email,
-                phone: phone,
-                address: address
-            },
-            success: function (result) {
-                // Razorpay options
-                var options = {
-                    // "key": "rzp_test_zpZdWBPgQwjbq0",
-                    "key": "rzp_live_9ggYgg6ccV2PqL",
-                    "amount": amt * 100, // Amount in paise
-                    "currency": "INR",
-                   "name": "Shameema sarees",
-                    "description": "Test Transaction",
-                    "image": "https://shameemasarees.com/images/logo.webp",
-                    "prefill": {
-                        "name": name,
-                        "email": email,
-                        "contact": phone
-                    },
-                    "handler": function (response) {
-                        // Send Razorpay payment ID to the server
-                        jQuery.ajax({
-                            type: 'post',
-                            url: 'payment_process.php',
-                            data: {
-                                payment_id: response.razorpay_payment_id
-                            },
-                            success: function (result) {
-                                window.location.href = "thank_you.php";
-                            },
-                            error: function (error) {
-                                alert("Payment failed. Please try again.");
-                                console.log(error);
-                            }
-                        });
-                    },
-                    "modal": {
-                        "escape": false
-                    }
-                };
-
-                // Initialize Razorpay and open payment popup
-                var rzp1 = new Razorpay(options);
-                rzp1.open();
-            },
-            error: function (error) {
-                alert("Error occurred while initiating payment. Please try again.");
-                console.log(error);
-            }
-        });
-
-        return false; // Prevent form from traditional submission
-    }
-</script>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Checkout detail</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form onsubmit="return pay_now(event)">
-          <input type="text" name="name" id="name" class="form-control mb-3  myshaad " placeholder="Enter your name" required />
-          <input type="number" name="amt" id="amt" class="form-control mb-3  myshaad  d-none" placeholder="Enter amount" required />
-          <input type="email" name="email" id="email" class="form-control mb-3  myshaad " placeholder="Enter email" required />
-          <input type="number" name="phone" id="phone" class="form-control mb-3  myshaad " placeholder="Enter phone number" required />
-          <input type="text" name="address" id="address" class="form-control mb-3  myshaad " placeholder="Enter address" required />
-          <button type="submit" class="btn btn-dark w-100" name="btn" id="btn">Pay Now</button>
-    </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Function to set the value of 'amt' input field
-  function setAmount(button) {
-      // Get the value of the clicked button
-      var amount = button.value;
-
-      // Set the value of the 'amt' input field
-      document.getElementById('amt').value = amount;
-  }
-</script>
 
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -596,7 +492,7 @@
                     </div>
     <div class="">
                       <button value="2499" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-dark w-100 mt-2 rounded-1 p-2 fs-7 btn-cart" onclick="setAmount(this)">Buy Now</button>
-                  </div>                      </div>
+                  </div>                        </div>
                   </div>
                 </div>
                 <div class="col mb-3">
@@ -778,6 +674,9 @@
                   <a href="/terms-and-conditions.html" class="nav-link">Terms & Conditions </a>
                 </li>
                 <li class="menu-item">
+                  <a href="/track-your-order.php" class="nav-link">Track Your Order </a>
+                </li>
+                <li class="menu-item">
                   <a href="/privacy-policy.html" class="nav-link">Privacy & Policy </a>
                 </li>
                 <li class="menu-item">
@@ -804,7 +703,11 @@
       <div class="container-lg">
         <div class="row">
           <div class="col-12 text-center copyright">
-            <p>© 2024 Organic. All rights reserved.</p>
+            <p>© 2024 All Rights Reserved | Designed and Developed by 
+              <a href="https://www.digitalexportsmarketing.com/" target="_blank" rel="noopener noreferrer">
+                Digital Exports Marketing
+              </a>
+            </p>
           </div>
       
         </div>
