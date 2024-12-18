@@ -54,11 +54,17 @@
                     <button class="nav-link btn btn-link text-start" onclick="showContent('allPayments')">All Payments</button>
                 </li>
                 <li class="nav-item">
+                    <button class="nav-link btn btn-link text-start" onclick="gohome()">Go Home</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn btn-link text-start" onclick="logout()">Log Out</button>
+                </li>
+                <!-- <li class="nav-item">
                     <button class="nav-link btn btn-link text-start" onclick="showContent('secondList')">Second List</button>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link btn btn-link text-start" onclick="showContent('thirdList')">Third List</button>
-                </li>
+                </li> -->
             </ul>
         </nav>
 
@@ -148,6 +154,22 @@
             document.querySelectorAll('.sidebar-content').forEach(content => content.classList.remove('active'));
             // Show the selected content
             document.getElementById(id).classList.add('active');
+        }
+        
+        function logout() {
+    // Display confirmation dialog
+    const confirmation = confirm("Are you sure you want to log out?");
+    
+    if (confirmation) {
+        // If the user confirms, clear the local storage and redirect to the login page
+        localStorage.removeItem('adminData');
+        window.location.href = 'login.php';
+    }
+}
+
+
+        function gohome(){
+            window.location.href = 'index.html';  // Redirect to login page after logout
         }
     </script>
 </body>
