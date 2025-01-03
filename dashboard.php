@@ -17,7 +17,6 @@
         }
         .nav-item{
             border: 1px solid #fff;
-           
             margin: 10px 30px;
         }
         .nav-item>button{
@@ -54,17 +53,17 @@
                     <button class="nav-link btn btn-link text-start" onclick="showContent('allPayments')">All Payments</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link btn btn-link text-start" onclick="gohome()">Go Home</button>
+                        <button class="nav-link btn btn-link text-start" onclick="showContent('secondList')">Create Product</button>
+                  </li>
+                <li class="nav-item">
+                    <button class="nav-link btn btn-link text-start" onclick="showContent('thirdList')">All Sarees</button>
                 </li>
+                <li class="nav-item">
+                    <button class="nav-link btn btn-link text-start" onclick="gohome()">Go Home</button>
+                 </li>
                 <li class="nav-item">
                     <button class="nav-link btn btn-link text-start" onclick="logout()">Log Out</button>
                 </li>
-                <!-- <li class="nav-item">
-                    <button class="nav-link btn btn-link text-start" onclick="showContent('secondList')">Second List</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link btn btn-link text-start" onclick="showContent('thirdList')">Third List</button>
-                </li> -->
             </ul>
         </nav>
 
@@ -128,15 +127,106 @@
 
             <!-- Second List Content -->
             <div id="secondList" class="sidebar-content">
-                <h2>Second List Content</h2>
-                <p>This is the content for the second list item.</p>
+                <form action="insert_product.php" method="POST" enctype="multipart/form-data" class="mt-5 mb-5">
+        <h2>Add New Product</h2>
+        <input class="form-control" type="text" name="product_name" id="product_name" placeholder="Saree Name" required><br>
+
+        <label for="image">Image:</label>
+        <input class="form-control" type="file" name="image" id="image" accept="image/*" required><br>
+
+        <textarea class="form-control" name="description" id="description" rows="3" placeholder="description" required ></textarea><br>
+
+        <input class="form-control" type="text" name="category" id="category" placeholder="category" required><br>
+
+        <input class="form-control" type="number" step="0.01" name="price" id="price" placeholder="price" required><br>
+
+        <input class="form-control" type="number"  name="offer" id="offer" placeholder="Offer" required><br>
+
+        <label for="available_in_stock">Available in Stock:</label>
+        <input  type="checkbox" name="available_in_stock" id="available_in_stock" value="1"><br>
+        <label for="istopcategory">Is Top Category:</label>
+        <input  type="checkbox" name="istopcategory" id="istopcategory" value="0"><br>
+
+        <button class='btn btn-success' type="submit" name="submit">Add Product</button>
+    </form>
+
             </div>
 
             <!-- Third List Content -->
             <div id="thirdList" class="sidebar-content">
-                <h2>Third List Content</h2>
-                <p>This is the content for the third list item.</p>
-            </div>
+    <h2>Third List Content</h2>
+    <p>This is the content for the third list item.</p>
+
+    <?php
+    require_once('db.php'); // Include your database connection file
+
+    // Fetch saree data from the database
+    $query = "SELECT * FROM sarees";
+    $result = $con->query($query);
+
+    // Check if there are any rows in the result
+    if ($result->num_rows > 0):
+    ?>
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Image</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Offer</th>
+                        <th>Available in Stock</th>
+                        <th>Top Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo $row['product_id']; ?></td>
+                            <td><?php echo htmlspecialchars($row['product_name'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td>
+                                <?php if ($row['image']): ?>
+                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($row['image']); ?>" alt="Saree Image" width="100" height="100">
+                                <?php else: ?>
+                                    <span>No Image</span>
+                                <?php endif; ?>
+                            </td>
+                            <td><?php echo htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($row['category'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo number_format($row['price'], 2); ?></td>
+                            <td><?php echo number_format($row['offer'], 2); ?>%</td>
+                            <td><?php echo $row['available_in_stock'] ? 'Yes' : 'No'; ?></td>
+                            <td><?php echo $row['istopcategory'] ? 'Yes' : 'No'; ?></td>
+                            <td>
+                                <!-- Delete button (form submission with the product_id) -->
+                                <form action="delete_product.php" method="POST" style="display:inline;">
+                                    <input type="hidden" name="product_id" value="<?php echo $row['product_id']; ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php
+    else:
+        echo "<p>No products found.</p>";
+    endif;
+
+    // Close the database connection
+    $con->close();
+    ?>
+</div>
+
+
+
+
+
         </main>
     </div>
 

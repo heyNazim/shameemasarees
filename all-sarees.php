@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>banarasi-semi-tisshu-crushed-silk-saree</title>
+    <title>About Us</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,117 +20,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   </head>
   <body>
-
-
-
-<script>
-    function pay_now(event) {
-        event.preventDefault();
-
-        // Fetching input values
-        var name = jQuery('#name').val();
-        var amt = jQuery('#amt').val();
-        var email = jQuery('#email').val();
-        var phone = jQuery('#phone').val();
-        var address = jQuery('#address').val();
-
-        // Sending data to the backend
-        jQuery.ajax({
-            type: 'post',
-            url: 'payment_process.php',
-            data: {
-                amt: amt,
-                name: name,
-                email: email,
-                phone: phone,
-                address: address
-            },
-            success: function (result) {
-                // Razorpay options
-                var options = {
-                    // "key": "rzp_test_zpZdWBPgQwjbq0",
-                    "key": "rzp_live_9ggYgg6ccV2PqL",
-                    "amount": amt * 100, // Amount in paise
-                    "currency": "INR",
-                   "name": "Shameema sarees",
-                    "description": "Test Transaction",
-                    "image": "https://shameemasarees.com/images/logo.webp",
-                    "prefill": {
-                        "name": name,
-                        "email": email,
-                        "contact": phone
-                    },
-                    "handler": function (response) {
-                        // Send Razorpay payment ID to the server
-                        jQuery.ajax({
-                            type: 'post',
-                            url: 'payment_process.php',
-                            data: {
-                                payment_id: response.razorpay_payment_id
-                            },
-                            success: function (result) {
-                                window.location.href = "thank_you.php";
-                            },
-                            error: function (error) {
-                                alert("Payment failed. Please try again.");
-                                console.log(error);
-                            }
-                        });
-                    },
-                    "modal": {
-                        "escape": false
-                    }
-                };
-
-                // Initialize Razorpay and open payment popup
-                var rzp1 = new Razorpay(options);
-                rzp1.open();
-            },
-            error: function (error) {
-                alert("Error occurred while initiating payment. Please try again.");
-                console.log(error);
-            }
-        });
-
-        return false; // Prevent form from traditional submission
-    }
-</script>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Checkout detail</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form onsubmit="return pay_now(event)">
-          <input type="text" name="name" id="name" class="form-control mb-3  myshaad " placeholder="Enter your name" required />
-          <input type="number" name="amt" id="amt" class="form-control mb-3  myshaad  d-none" placeholder="Enter amount" required />
-          <input type="email" name="email" id="email" class="form-control mb-3  myshaad " placeholder="Enter email" required />
-          <input type="number" name="phone" id="phone" class="form-control mb-3  myshaad " placeholder="Enter phone number" required />
-          <input type="text" name="address" id="address" class="form-control mb-3  myshaad " placeholder="Enter address" required />
-          <button type="submit" class="btn btn-dark w-100" name="btn" id="btn">Pay Now</button>
-    </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Function to set the value of 'amt' input field
-  function setAmount(button) {
-      // Get the value of the clicked button
-      var amount = button.value;
-
-      // Set the value of the 'amt' input field
-      document.getElementById('amt').value = amount;
-  }
-</script>
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
       <defs>
@@ -196,48 +87,7 @@
       </div>
     </div>
 
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart">
-      <div class="offcanvas-header justify-content-center">
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <div class="order-md-last">
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-primary">Your cart</span>
-            <span class="badge bg-primary rounded-pill">3</span>
-          </h4>
-          <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Growers cider</h6>
-                <small class="text-body-secondary">Brief description</small>
-              </div>
-              <span class="text-body-secondary">$12</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Fresh grapes</h6>
-                <small class="text-body-secondary">Brief description</small>
-              </div>
-              <span class="text-body-secondary">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Heinz tomato ketchup</h6>
-                <small class="text-body-secondary">Brief description</small>
-              </div>
-              <span class="text-body-secondary">$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
-            </li>
-          </ul>
-  
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
-        </div>
-      </div>
-    </div>
+
     
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
 
@@ -359,7 +209,7 @@
           
           <div class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
             <div class="d-flex align-items-center my-3 my-sm-0">
-              <a href="index.html">
+             <a href="index.php">
                 <img src="images/logo.webp" alt="logo" width="50px">
               </a>
             </div>
@@ -397,7 +247,7 @@
               <li class="nav-item active">
                 <a href="index.html" class="nav-link">Home</a>
               </li>
-         <li class="nav-item dropdown">
+              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle pe-3" role="button" id="pages" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
                 <ul class="dropdown-menu border-0 p-3 rounded-0 shadow" aria-labelledby="pages">
                   <li><a href="/about-us.html" class="dropdown-item">About Us </a></li>
@@ -428,117 +278,71 @@
     </header>
 
 
+    <section class="py-5">
+  <div class="container-lg">
+    <div class="row">
+      <?php
+      require_once('db.php');
 
-    <section class="pb-5">
-        <div class="container-lg">
+      // SQL query to retrieve one product per category
+      $sql = "SELECT MIN(product_id) AS product_id, product_name, image, description, category, price, available_in_stock
+              FROM sarees
+              GROUP BY category";
+      $result = $con->query($sql);
+
+      // Check if there are any sarees
+      if ($result->num_rows > 0) {
+        // Loop through the results and display each product
+        while ($row = $result->fetch_assoc()) {
+          // Fetch product details
+          $product_id = $row['product_id'];
+          $product_name = $row['product_name'];
+          $image_data = $row['image'];
+          $description = $row['description'];
+          $category = $row['category'];
+          $price = $row['price'];
+          $available_in_stock = $row['available_in_stock'];
+          $discount = 15; // Example discount percentage
+          $discounted_price = $price - ($price * ($discount / 100));
+          ?>
+          <div class="col-3 mb-3">
+            <div class="inner-content shadow  p-2 text-center">
+              <?php
+              // Display image if available
+              if ($image_data) {
+                echo '<img src="data:image/jpeg;base64,' . base64_encode($image_data) . '" class="img-fluid" style="max-height: 250px" alt="' . htmlspecialchars($product_name) . '">';
+              } else {
+                echo '<img src="./assets/saree/default-image.webp" class="img-fluid" alt="Category Thumbnail">';
+              }
+              ?>
+              <h3 class="fs-6 mt-3 fw-normal category-title"><?php echo htmlspecialchars($product_name); ?></h3>
+              <div class="d-flex justify-content-center align-items-center gap-2">
+                <span class="text-dark">₹<?php echo number_format($price); ?></span>
+                <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary"><?php echo $discount; ?>% OFF</span>
+              </div>
+              <a href="product-category.php?category=<?php echo urlencode($category); ?>" class="btn btn-dark">See More</a>
+            </div>
+          </div>
+          <?php
+        }
+      } else {
+        echo "<div class='col-12'><p>No sarees found.</p></div>";
+      }
+
+      // Close the connection
+      $con->close();
+      ?>
+    </div>
+  </div>
+</section>
   
-          <div class="row">
-            <div class="col-md-12">
-              <div class="section-header d-flex flex-wrap justify-content-between my-4">
-                <h2 class="section-title mt-5">BANARASI SEMI TISSHU CRUSHED SILK SAREE</h2>
-                <div class="d-flex align-items-center">
-                  <a href="#" class="btn btn-primary rounded-1">View All</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-md-12">
-              <div class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-5">
-             
-                <div class="col mb-3">
-                  <div class="product-item shadow">
-                    <figure>
-                    <img src="assets/saree/banarasi-semi-tisshu-crushed-silk-saree/img1.webp" alt="Product Thumbnail" class="img-fluid">
-                    </figure>
-                    <div class="d-flex flex-column text-center">
-                      <div class="d-flex justify-content-center align-items-center gap-2">
-                        <!-- <del>Rs: 24.00</del> -->
-                        <span class="text-dark fw-semibold">₹2899.00</span>
-                        <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10% OFF</span>
-                    </div>
-   <div class="">
-                      <button value="2899" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-dark w-100 mt-2 rounded-1 p-2 fs-7 btn-cart" onclick="setAmount(this)">Buy Now</button>
-                  </div>                      </div>
-                  </div>
-                </div>
-                <div class="col mb-3">
-                  <div class="product-item shadow">
-                    <figure>
-                    <img src="assets/saree/banarasi-semi-tisshu-crushed-silk-saree/img2.webp" alt="Product Thumbnail" class="img-fluid">
-                    </figure>
-                    <div class="d-flex flex-column text-center">
-                      <div class="d-flex justify-content-center align-items-center gap-2">
-                        <!-- <del>Rs: 24.00</del> -->
-                        <span class="text-dark fw-semibold">₹2899.00</span>
-                        <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10% OFF</span>
-                    </div>
-   <div class="">
-                      <button value="2899" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-dark w-100 mt-2 rounded-1 p-2 fs-7 btn-cart" onclick="setAmount(this)">Buy Now</button>
-                  </div>                      </div>
-                  </div>
-                </div>
-                <div class="col mb-3">
-                  <div class="product-item shadow">
-                    <figure>
-                    <img src="assets/saree/banarasi-semi-tisshu-crushed-silk-saree/img3.webp" alt="Product Thumbnail" class="img-fluid">
-                    </figure>
-                    <div class="d-flex flex-column text-center">
-                      <div class="d-flex justify-content-center align-items-center gap-2">
-                        <!-- <del>Rs: 24.00</del> -->
-                        <span class="text-dark fw-semibold">₹2899.00</span>
-                        <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10% OFF</span>
-                    </div>
-   <div class="">
-                      <button value="2899" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-dark w-100 mt-2 rounded-1 p-2 fs-7 btn-cart" onclick="setAmount(this)">Buy Now</button>
-                  </div>                      </div>
-                  </div>
-                </div>
-                <div class="col mb-3">
-                  <div class="product-item shadow">
-                    <figure>
-                    <img src="assets/saree/banarasi-semi-tisshu-crushed-silk-saree/img4.webp" alt="Product Thumbnail" class="img-fluid">
-                    </figure>
-                    <div class="d-flex flex-column text-center">
-                      <div class="d-flex justify-content-center align-items-center gap-2">
-                        <!-- <del>Rs: 24.00</del> -->
-                        <span class="text-dark fw-semibold">₹2899.00</span>
-                        <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10% OFF</span>
-                    </div>
-   <div class="">
-                      <button value="2899" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-dark w-100 mt-2 rounded-1 p-2 fs-7 btn-cart" onclick="setAmount(this)">Buy Now</button>
-                  </div>                      </div>
-                  </div>
-                </div>
-                <div class="col mb-3">
-                  <div class="product-item shadow">
-                    <figure>
-                    <img src="assets/saree/banarasi-semi-tisshu-crushed-silk-saree/img5.webp" alt="Product Thumbnail" class="img-fluid">
-                    </figure>
-                    <div class="d-flex flex-column text-center">
-                      <div class="d-flex justify-content-center align-items-center gap-2">
-                        <!-- <del>Rs: 24.00</del> -->
-                        <span class="text-dark fw-semibold">₹2899.00</span>
-                        <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10% OFF</span>
-                    </div>
-   <div class="">
-                      <button value="2899" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-dark w-100 mt-2 rounded-1 p-2 fs-7 btn-cart" onclick="setAmount(this)">Buy Now</button>
-                  </div>                      </div>
-                  </div>
-                </div>
-          
-                
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    <hr>
 
 
-   
+
+
+<hr>
+
+
     <footer class="py-5">
       <div class="container-lg">
         <div class="row">
