@@ -1,10 +1,6 @@
 <?php
 require_once('db.php');
 
-// Check connection
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-}
 
 if(isset($_POST['submit'])){
     $inputEmail = $_POST['InputEmail'];

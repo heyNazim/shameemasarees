@@ -41,19 +41,19 @@
           </div>
           <div class="col-md-3 col-sm-6">
             <div class="footer-menu">
-              <h5 class="widget-title">Useful links</h5>
+              <h5 class="widget-title">Our Products</h5>
               <ul class="menu-list list-unstyled">
                 <li class="menu-item">
-                  <a href="/bsaress.php" class="nav-link">Banarasi Sarees</a>
+                  <a href="#" class="nav-link">Banarasi Sarees</a>
                 </li>
                 <li class="menu-item">
-                  <a href="semigeogerttesaree.php" class="nav-link">Semi Georgette Sarees </a>
+                  <a href="#" class="nav-link">Semi Georgette Sarees </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/linen.php" class="nav-link">Linen Tissue Sarees </a>
+                  <a href="#" class="nav-link">Linen Tissue Sarees </a>
                 </li>
                 <li class="menu-item">
-                  <a href="/orgenza-saree.php" class="nav-link">Organza Sarees</a>
+                  <a href="#" class="nav-link">Organza Sarees</a>
                 </li>
               </ul>
             </div>
