@@ -5,6 +5,7 @@ try {
     // $dbname = 'razpay'; 
     // $username = 'root';
     // $password = ''; 
+
 $servername = "localhost";
 $username = "u371702595_zubair";
 $password = "Zubair@00786";

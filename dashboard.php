@@ -70,7 +70,7 @@
         <!-- Content -->
         <main class="col-lg-9 col-md-8 offset-lg-3 offset-md-4 px-3" id="mainContent">
             <!-- All Payments Content -->
-            <div id="allPayments" class="sidebar-content active">
+            <div id="allPayments" class="sidebar-content">
                 <h1 class="mt-5">All Payment Records</h1>
                 <?php  
                 require_once('db.php');
@@ -153,7 +153,7 @@
             </div>
 
             <!-- Third List Content -->
-            <div id="thirdList" class="sidebar-content">
+            <div id="thirdList" class="sidebar-content active">
     <h2>Third List Content</h2>
     <p>This is the content for the third list item.</p>
 
@@ -207,6 +207,10 @@
                                     <input type="hidden" name="product_id" value="<?php echo $row['product_id']; ?>">
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>
                                 </form>
+
+                                    <!-- Edit button -->
+    <a href="edit_product.php?product_id=<?php echo $row['product_id']; ?>" class="btn btn-warning btn-sm w-100 mt-2">Edit</a>
+
                             </td>
                         </tr>
                     <?php endwhile; ?>
